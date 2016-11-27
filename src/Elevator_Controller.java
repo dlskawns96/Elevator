@@ -8,14 +8,13 @@ public class Elevator_Controller {
 	Elevator_Operation total = new Elevator_Operation();
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+		person = new Person[10];
 
 		int time =0;
 		for(int i=0; i<personNumber; i++){
 			person[i] = new Person();
+			System.out.println(person[i].getWeight());
 		}
-		
-		System.out.println(person[0].getWeight());
 	}
 	
 
