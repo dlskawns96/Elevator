@@ -71,5 +71,14 @@ public class Person {
 			}
 		}
 	}
+	public int getWeight(){
+		return weight;
+	}
+	public int getStart(){
+		return startF;
+	}
+	public int getDep(){
+		return depF;
+	}
 	
 }
