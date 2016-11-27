@@ -43,7 +43,7 @@ public class Person {
 	
 	private int makeWeight(){
 		int tmp =0;
-		tmp = random.nextInt(20)+50;
+		tmp = random.nextInt(20)+50;// 50 ~ 70
 		return tmp;
 	}
 	private int makeFloor(){
