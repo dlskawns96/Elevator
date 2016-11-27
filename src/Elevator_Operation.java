@@ -52,20 +52,20 @@ public class Elevator_Operation {
     	}
     }
     
-    public boolean boarding(int person_weight, int person_dest){
-    	if(current_weight + person_weight <= max_weight){
-    		current_weight = current_weight + person_weight;
-    		stop[person_dest - 1] = true;
-    		if(goingUp == true && person_dest > dest){
+    public boolean boarding(int person_weight, int person_dest){ // 사람들이 탈수있는지 보는 것 입니다.
+    	if(current_weight + person_weight <= max_weight){ // 만약 몸무게가 허용가능하다면 탈 수 있겠지요...
+    		current_weight = current_weight + person_weight; // 몸무게를 업데이트 해줍니다.
+    		stop[person_dest - 1] = true; // 그 사람이 내릴 곳을 체크해줍니다.
+    		if(goingUp == true && person_dest > dest){ // 방향이 같고 방금 탄 사람의 목적지가 제일 높으면 업데이트 해줍니다.
     			dest = person_dest;
     		}
-    		else if(goingUp == false && person_dest < dest){
+    		else if(goingUp == false && person_dest < dest){ // 위와 같이 이건 목적지가 제일 낮으면 업데이트 하는 것.
     			dest = person_dest;
     		}
-    		return true;
+    		return true; // 탔음을 알립니다.
     	}
     	else{
-    		return false;
+    		return false; // 몸무게 때매 못탔어요.
     	}
     }
 }
