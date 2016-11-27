@@ -4,7 +4,7 @@ public class Person {
 	private int startF =0;
 	private int depF =0;
 	private int weight =0;
-	private boolean evenUp = false;
+	private boolean evenUp = false;// 목적지 기준
 	private boolean evenDown = false;
 	private boolean oddUp = false;
 	private boolean oddDown = false;
@@ -37,6 +37,7 @@ public class Person {
 		evenDown = false;
 		oddUp = false;
 		oddDown = false;
+		makeBoolean();
 		
 	}
 	
@@ -52,6 +53,23 @@ public class Person {
 		return tmp;
 	}
 	
-	
+	private void makeBoolean(){
+		if((depF %2)==1){ // 목적지가 홀수층 
+			if(depF - startF >0){// 위로
+				oddUp = true;
+			}
+			else{
+				oddDown = true;
+			}
+		}
+		else{// 목적지 짝수층
+			if(depF - startF >0){// 위로
+				evenUp = true;
+			}
+			else{
+				evenDown = true;
+			}
+		}
+	}
 	
 }
