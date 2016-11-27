@@ -6,14 +6,18 @@ public class Elevator_Operation {
     private int current_weight;
     private int max_weight;
     private int dest;
+    private boolean[] stop = new boolean[10];
     private boolean goingUp;
     
     public Elevator_Operation(){
+    	int i;
     	current_floor = 1;
     	current_weight = 0;
     	max_weight = 1000;
     	goingUp = true;
     	dest = 1;
+    	for(i = 0; i < top; i++)
+    		stop[i] = false;
     }
 
 	public int getDest() {
@@ -45,6 +49,23 @@ public class Elevator_Operation {
     		//문을 열고 사람들이 나가기 시작합니다...
     		//또한 밑바닥을 찍었으니...올라가야겠지요...
     		goingUp = true;
+    	}
+    }
+    
+    public boolean boarding(int person_weight, int person_dest){
+    	if(current_weight + person_weight <= max_weight){
+    		current_weight = current_weight + person_weight;
+    		stop[person_dest - 1] = true;
+    		if(goingUp == true && person_dest > dest){
+    			dest = person_dest;
+    		}
+    		else if(goingUp == false && person_dest < dest){
+    			dest = person_dest;
+    		}
+    		return true;
+    	}
+    	else{
+    		return false;
     	}
     }
 }
