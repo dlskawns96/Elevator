@@ -1,15 +1,15 @@
-
 public class Elevator_Operation {
 	private static int top = 10;
     private static int bottom = 1;
-	private int current_floor;
+	private int current_floor;// 1~ 10
     private int current_weight;
     private int max_weight;
-    private int dest;
+    private int dest; // current Top & bottom  1~10
     private boolean[] stop = new boolean[10];
     private boolean goingUp;// 전체적인 방향성
-    private boolean stopping;
-    
+    private boolean stopping;// 손님을 내리기 위해서 멈추었는가
+    private boolean isWork; // 일하고 있는지 아닌지
+    private Person[] passenger = new Person[20]; // 탑승객 리스트
     
     public Elevator_Operation(){
     	int i;
@@ -19,9 +19,14 @@ public class Elevator_Operation {
     	goingUp = true;
     	dest = 1;
     	stopping = true;
+    	isWork = false;
     	for(i = 0; i < top; i++)
     		stop[i] = false;
     }
+    
+    // request(Person next_person) 만들기 - 탑승이 허락된 승객의 정보를 업데이트 하여 dest와 stop[]을 업데이트 해주어 어디서 정지해야할지 결정
+    // Run()만들기 - 엘리베이터가 다음 턴에 수행할 작업을 처리해주는 메소드
+    // Person의 isArrive와 isBoarding을 처리해 줄 방법 만들기
 
 	public int getDest() {
 		return dest;
@@ -42,18 +47,17 @@ public class Elevator_Operation {
 	public int getCurrentFloor(){
 		return current_floor;
 	}
+	
+	public boolean getisWork(){
+		return isWork;
+	}
     
     public void up(){ //엘리베이터가 올라갈 때 실행
     	if(current_floor < dest && stopping == false){ // 제일 마지막 목적지에 도달하지 않고 움직이고 있다면...실행됩니다...
     		//모든 사람들은 본인의 목적지를 가지고 올라가기 시작합니다...
     		current_floor = current_floor + 1;
-    		if(stop[current_floor - 1]){ // 멈춰야 하는 층에서는 멈춰야겠지요...
-    			stopping = true; // 앙~멈춤띠
-    			stop[current_floor - 1] = false;
-    		}
     	}
     	else{
-    		//문을 열고 사람들이 나가기 시작합니다...
     		//또한 꼭대기에 올라왔으니....내려가야 겠지요...
     		goingUp = false;
     	}
@@ -63,16 +67,22 @@ public class Elevator_Operation {
     	if(current_floor > dest && stopping == false){// 제일 마지막 목적지에 도달하지 않고 움직이고 있다면...실행됩니다...
     		//모든 사람들이 목적지를 가지고 내려가기 시작합니다.
     		current_floor = current_floor - 1;
-    		if(stop[current_floor - 1]){ // 멈춰야 하는 층에서는 멈춰야겠지요...
-    			stopping = true; // 앙~멈춤띠
-    			stop[current_floor - 1] = false;
-    		}
     	}
     	else{
-    		//문을 열고 사람들이 나가기 시작합니다...
-    		//또한 밑바닥을 찍었으니...올라가야겠지요...
+       		//또한 밑바닥을 찍었으니...올라가야겠지요...
     		goingUp = true;
     	}
+    }
+    
+    public void check_arrive(){
+    	if(stop[current_floor - 1]){
+    		stopping = true;
+    		stop[current_floor - 1] = false;
+    	}
+    }
+    
+    public void departure(){ // isArrive를 완료시켰다면...이것을 이용하여...추울발!
+    	stopping = false;
     }
     
     public boolean boarding(int person_weight, int person_dest){ // 사람들이 탈수있는지 보는 것 입니다.
@@ -92,32 +102,70 @@ public class Elevator_Operation {
     	}
     }
     
-    public void departure(){ // isArrive를 완료시켰다면...이것을 이용하여...추울발!
-    	stopping = false;
-    }
-    
     public void minum_weight(int person_weight){ // 내리는 사람 몸무게를 빼주어...엘리베이터에서 내리게 하는 것입니다...
     	current_weight = current_weight - person_weight;
     }
-    
-   /* public int estimate_time(int request_floor, boolean goUp){
-    	int time = 0;
-    	
-    	if(goUp == true && goingUp == true && current_floor < request_floor){
-    		time = request_floor - current_floor;
-    		for(int i = current_floor; i < request_floor; i++){
-    			if(stop[i - 1] == true)
-    				time++;
-    		}
-    		return time;
-    	}
-    	else if(goUp == true && goingUp == true && current_floor > request_floor){
-    		time = top - current_floor;
-    		for(int i = current_floor; i < top; i++){
-    			if(stop[i-1] == true)
-    				time++;
-    		}
-    		time = time + top - request_floor;
-    	}
-    }*/
+   
+    public int estimate_time(int request_floor, boolean goUp){
+	    int time =0;
+	    
+	    //방향
+	    
+	    if(stopping == true){// 일 안하고 있을 경우
+	   	 time =0;// stopping -> isWork로 바꿔줘요
+	    }
+	    else if(goUp == goingUp && goingUp == true){ //가는 방향이 같고 위로 가는 경우
+	   	 	if(current_floor > request_floor){ // 경로상에 없는 경우
+	   	 		time += dest - current_floor;
+	   	 		for(int i= current_floor-1; i<dest; i++){
+	   	 			if(stop[i] == true){
+	   	 				time++;
+	   	 			}
+	   	 		}
+	   	 		time += dest - request_floor;
+	   	 	}
+	   	 	else{// 태울수 있는 경우
+	    		time += request_floor - current_floor;
+	
+	   	 	}
+	   	 	
+	    }
+	    else if(goUp == goingUp && goingUp == false){//가는 방향이 같고 아래로 가는 경우
+	    	if(current_floor < request_floor){// 경로상에 없는 경우
+	    		time +=  current_floor - dest;
+	   	 		for(int i= current_floor-1; i>dest; i--){
+	   	 			if(stop[i] == true){
+	   	 				time++;
+	   	 			}
+	   	 		}
+	   	 		time += request_floor - dest;
+	
+	    	}
+	    	else{// 태울수 있는 경우
+	    		time += current_floor - request_floor;
+	    		
+	    	}
+	    }
+	    else if(goingUp == true){// 위로 올라가고 눌러진 버튼은 아래
+	    	time += dest - current_floor;
+	    	for(int i= current_floor-1; i<dest; i++){
+		 			if(stop[i] == true){
+		 				time++;
+		 			}
+		 		}
+	    	time += dest - request_floor;
+	    }
+	    else if(goingUp == false){
+	    	time +=  current_floor - dest;
+		 		for(int i= current_floor-1; i>dest; i--){
+		 			if(stop[i] == true){
+		 				time++;
+		 			}
+		 		}
+		 		time += request_floor - dest;
+	    }
+	    
+	    return time;
+    }
+     
 }
