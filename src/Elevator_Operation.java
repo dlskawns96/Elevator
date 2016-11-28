@@ -101,91 +101,67 @@ public class Elevator_Operation {
     public void minum_weight(int person_weight){ // 내리는 사람 몸무게를 빼주어...엘리베이터에서 내리게 하는 것입니다...
     	current_weight = current_weight - person_weight;
     }
-
-    
-   /*	vol.Umin
-    *  public int estimate_time(int request_floor, boolean goUp){
-    	int time = 0;
-    	
-    	if(goUp == true && goingUp == true && current_floor < request_floor){
-    		time = request_floor - current_floor;
-    		for(int i = current_floor; i < request_floor; i++){
-    			if(stop[i - 1] == true)
-    				time++;
-    		}
-    		return time;
-    	}
-    	else if(goUp == true && goingUp == true && current_floor > request_floor){
-    		time = top - current_floor;
-    		for(int i = current_floor; i < top; i++){
-    			if(stop[i-1] == true)
-    				time++;
-    		}
-    		time = time + top - request_floor;
-    	}
-    }*/
-    
-    //vol.SJae
+   
     public int estimate_time(int request_floor, boolean goUp){
-    int time =0;
-    
-    //방향
-    
-    if(stopping == true){// 일 안하고 있을 경우
-   	 time =0;// stopping -> isWork로 바꿔줘요
-    }
-    else if(goUp == goingUp && goingUp == true){ //가는 방향이 같고 위로 가는 경우
-   	 	if(current_floor > request_floor){ // 경로상에 없는 경우
-   	 		time += dest - current_floor;
-   	 		for(int i= current_floor-1; i<dest; i++){
-   	 			if(stop[i] == true){
-   	 				time++;
-   	 			}
-   	 		}
-   	 		time += dest - request_floor;
-   	 	}
-   	 	else{// 태울수 있는 경우
-    		time += request_floor - current_floor;
-
-   	 	}
-   	 	
-    }
-    else if(goUp == goingUp && goingUp == false){//가는 방향이 같고 아래로 가는 경우
-    	if(current_floor < request_floor){// 경로상에 없는 경우
-    		time +=  current_floor - dest;
-   	 		for(int i= current_floor-1; i>dest; i--){
-   	 			if(stop[i] == true){
-   	 				time++;
-   	 			}
-   	 		}
-   	 		time += request_floor - dest;
-
-    	}
-    	else{// 태울수 있는 경우
-    		time += current_floor - request_floor;
-    		
-    	}
-    }
-    else if(goingUp == true){// 위로 올라가고 눌러진 버튼은 아래
-    	time += dest - current_floor;
-    	for(int i= current_floor-1; i<dest; i++){
-	 			if(stop[i] == true){
-	 				time++;
-	 			}
-	 		}
-    	time += dest - request_floor;
-    }
-    else if(goingUp == false){
-    	time +=  current_floor - dest;
-	 		for(int i= current_floor-1; i>dest; i--){
-	 			if(stop[i] == true){
-	 				time++;
-	 			}
-	 		}
-	 		time += request_floor - dest;
-    }
-    
-    return time;
+	    int time =0;
+	    
+	    //방향
+	    
+	    if(stopping == true){// 일 안하고 있을 경우
+	   	 time =0;// stopping -> isWork로 바꿔줘요
+	    }
+	    else if(goUp == goingUp && goingUp == true){ //가는 방향이 같고 위로 가는 경우
+	   	 	if(current_floor > request_floor){ // 경로상에 없는 경우
+	   	 		time += dest - current_floor;
+	   	 		for(int i= current_floor-1; i<dest; i++){
+	   	 			if(stop[i] == true){
+	   	 				time++;
+	   	 			}
+	   	 		}
+	   	 		time += dest - request_floor;
+	   	 	}
+	   	 	else{// 태울수 있는 경우
+	    		time += request_floor - current_floor;
+	
+	   	 	}
+	   	 	
+	    }
+	    else if(goUp == goingUp && goingUp == false){//가는 방향이 같고 아래로 가는 경우
+	    	if(current_floor < request_floor){// 경로상에 없는 경우
+	    		time +=  current_floor - dest;
+	   	 		for(int i= current_floor-1; i>dest; i--){
+	   	 			if(stop[i] == true){
+	   	 				time++;
+	   	 			}
+	   	 		}
+	   	 		time += request_floor - dest;
+	
+	    	}
+	    	else{// 태울수 있는 경우
+	    		time += current_floor - request_floor;
+	    		
+	    	}
+	    }
+	    else if(goingUp == true){// 위로 올라가고 눌러진 버튼은 아래
+	    	time += dest - current_floor;
+	    	for(int i= current_floor-1; i<dest; i++){
+		 			if(stop[i] == true){
+		 				time++;
+		 			}
+		 		}
+	    	time += dest - request_floor;
+	    }
+	    else if(goingUp == false){
+	    	time +=  current_floor - dest;
+		 		for(int i= current_floor-1; i>dest; i--){
+		 			if(stop[i] == true){
+		 				time++;
+		 			}
+		 		}
+		 		time += request_floor - dest;
+	    }
+	    
+	    return time;
     }
      
 }
