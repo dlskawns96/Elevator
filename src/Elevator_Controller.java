@@ -49,6 +49,12 @@ public class Elevator_Controller {
 	}
 	public static void allocateElevator(Person man){// man에게 최적화된 elevator를 할당시켜준다.
 		if(man.getTotal() == true){// 가려는 층과 현재 있는 층이 달라서 total elevator만 이용해야 하는 경우
+			while(total.getCurrentFloor() != man.getStart()){
+				if(total.getCurrentFloor() < man.getStart())
+					total.up();
+				else
+					total.down();
+			}
 		}
 		else if(man.getEvenDown() == true || man.getEvenUp() == true){
 			// 짝수 층

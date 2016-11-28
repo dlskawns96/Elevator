@@ -9,6 +9,7 @@ public class Elevator_Operation {
     private boolean[] stop = new boolean[10];
     private boolean goingUp;// 전체적인 방향성
     private boolean stopping;
+    private boolean isWork;
     
     
     public Elevator_Operation(){
@@ -19,6 +20,7 @@ public class Elevator_Operation {
     	goingUp = true;
     	dest = 1;
     	stopping = true;
+    	isWork = false;
     	for(i = 0; i < top; i++)
     		stop[i] = false;
     }
@@ -41,6 +43,10 @@ public class Elevator_Operation {
 	
 	public int getCurrentFloor(){
 		return current_floor;
+	}
+	
+	public boolean getisWork(){
+		return isWork;
 	}
     
     public void up(){ //엘리베이터가 올라갈 때 실행
