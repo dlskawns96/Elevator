@@ -8,6 +8,7 @@ public class Elevator_Operation {
     private int dest;
     private boolean[] stop = new boolean[10];
     private boolean goingUp;
+    private boolean stopping;
     
     
     public Elevator_Operation(){
@@ -17,6 +18,7 @@ public class Elevator_Operation {
     	max_weight = 1000;
     	goingUp = true;
     	dest = 1;
+    	stopping = true;
     	for(i = 0; i < top; i++)
     		stop[i] = false;
     }
@@ -28,11 +30,27 @@ public class Elevator_Operation {
 	public void setDest(int dest) { // 목적지를 받아주는 Setter method
 		this.dest = dest;
 	}
+	
+	public boolean getStopping(){
+		return stopping;
+	}
+	
+	public boolean getGoingUp(){
+		return goingUp;
+	}
+	
+	public int getCurrentFloor(){
+		return current_floor;
+	}
     
     public void up(){ //엘리베이터가 올라갈 때 실행
-    	if(current_floor < dest){
+    	if(current_floor < dest && stopping == false){ // 제일 마지막 목적지에 도달하지 않고 움직이고 있다면...실행됩니다...
     		//모든 사람들은 본인의 목적지를 가지고 올라가기 시작합니다...
     		current_floor = current_floor + 1;
+    		if(stop[current_floor - 1]){ // 멈춰야 하는 층에서는 멈춰야겠지요...
+    			stopping = true; // 앙~멈춤띠
+    			stop[current_floor - 1] = false;
+    		}
     	}
     	else{
     		//문을 열고 사람들이 나가기 시작합니다...
@@ -42,9 +60,13 @@ public class Elevator_Operation {
     }
     
     public void down(){ //엘리베이터가 내려갈 때 실행
-    	if(current_floor > dest){
+    	if(current_floor > dest && stopping == false){// 제일 마지막 목적지에 도달하지 않고 움직이고 있다면...실행됩니다...
     		//모든 사람들이 목적지를 가지고 내려가기 시작합니다.
     		current_floor = current_floor - 1;
+    		if(stop[current_floor - 1]){ // 멈춰야 하는 층에서는 멈춰야겠지요...
+    			stopping = true; // 앙~멈춤띠
+    			stop[current_floor - 1] = false;
+    		}
     	}
     	else{
     		//문을 열고 사람들이 나가기 시작합니다...
@@ -68,5 +90,13 @@ public class Elevator_Operation {
     	else{
     		return false; // 몸무게 때매 못탔어요.
     	}
+    }
+    
+    public void departure(){ // isArrive를 완료시켰다면...이것을 이용하여...추울발!
+    	stopping = false;
+    }
+    
+    public void minum_weight(int person_weight){ // 내리는 사람 몸무게를 빼주어...엘리베이터에서 내리게 하는 것입니다...
+    	current_weight = current_weight - person_weight;
     }
 }
