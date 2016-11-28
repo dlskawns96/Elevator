@@ -1,14 +1,7 @@
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
+import java.awt.*;
 
-import javax.swing.Icon;
-import javax.swing.ImageIcon;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.border.Border;
-import javax.swing.border.EmptyBorder;
-import javax.swing.border.LineBorder;
+import javax.swing.*;
+import javax.swing.border.*;
 
 public class ElevatorGUI extends JFrame {
 
@@ -17,7 +10,9 @@ public class ElevatorGUI extends JFrame {
 	private JLabel secondElevator[] = new JLabel[10];
 	private JLabel thirdElevator[] = new JLabel[10];
 	
-	private ImageIcon elevatorIcon = new ImageIcon("elevator.png");
+	private Image img = Toolkit.getDefaultToolkit().getImage("elevator.png");
+	private ImageIcon elevatorIcon = new ImageIcon(img);
+	
 	
 	private static int curFloor[] = new int[3];
 	
@@ -25,13 +20,15 @@ public class ElevatorGUI extends JFrame {
 	 * Launch the application.
 	 */	
 
-	public static void run() {
+	public  void run() {
 		
 		curFloor[0] = 0;
 		curFloor[1] = 0;
 		curFloor[2] = 0;
+		
 		try {
-			ElevatorGUI frame = new ElevatorGUI();			
+			ElevatorGUI frame = new ElevatorGUI();	
+			frame.setTitle("Elevator Statement");
 			frame.setVisible(true);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -44,32 +41,31 @@ public class ElevatorGUI extends JFrame {
 	 */
 	public ElevatorGUI() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 225, 845);
-		
+		setBounds(100, 100, 240, 845);
+		Color col = new Color(255,255,255);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		
 		setContentPane(contentPane);
-		contentPane.setLayout(null);
-			
+		contentPane.setLayout(null);		
+		contentPane.setBackground(col);
+		Border border = LineBorder.createBlackLineBorder();
 		
-		
-		Border border = LineBorder.createGrayLineBorder();
 		
 		for(int i = 0;i<10;i++)
 		{	
 			firstElevator[9 - i] = new JLabel();
 			firstElevator[9 - i].setBorder(border);
-			firstElevator[9 - i].setBounds(0, 80*i, 70, 80);
+			firstElevator[9 - i].setBounds(0, 80*i, 72, 80);
 			contentPane.add(firstElevator[9 - i]);
 			
 			secondElevator[9 - i] = new JLabel();
 			secondElevator[9 - i].setBorder(border);
-			secondElevator[9 - i].setBounds(70, 80*i, 70, 80);
+			secondElevator[9 - i].setBounds(75, 80*i, 72, 80);
 			contentPane.add(secondElevator[9 - i]);
 			
 			thirdElevator[9 - i] = new JLabel();
 			thirdElevator[9 - i].setBorder(border);
-			thirdElevator[9 - i].setBounds(140, 80*i, 70, 80);
+			thirdElevator[9 - i].setBounds(150, 80*i, 72, 80);
 			contentPane.add(thirdElevator[9 - i]);
 		}
 		firstElevator[0].setIcon(elevatorIcon);
