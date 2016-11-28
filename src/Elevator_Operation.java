@@ -9,6 +9,7 @@ public class Elevator_Operation {
     private boolean[] stop = new boolean[10];
     private boolean goingUp;
     
+    
     public Elevator_Operation(){
     	int i;
     	current_floor = 1;
