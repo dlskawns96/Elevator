@@ -100,7 +100,7 @@ public class Elevator_Operation {
     	current_weight = current_weight - person_weight;
     }
     
-   /* public int estimate_time(int request_floor, boolean goUp){
+   /* public int estimate_time(in request_floor, boolean goUp){
     	int time = 0;
     	
     	if(goUp == true && goingUp == true && current_floor < request_floor){
