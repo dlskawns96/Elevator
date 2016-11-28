@@ -60,6 +60,7 @@ public class Elevator_Controller {
 			// Â¦¼ö Ãþ
 			if(man.getEvenDown() == true){
 				// Â¦¼ö ¾Æ·¡·Î
+				
 			}
 			else{
 				// Â¦¼ö À§·Î
