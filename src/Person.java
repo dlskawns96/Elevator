@@ -1,8 +1,8 @@
 import java.util.Random;
 
 public class Person {
-	private int startF =0;// 0~9
-	private int depF =0;// 0~9
+	private int startF =0;// 1 ~ 10
+	private int depF =0;// 1 ~10
 	private int weight =0;
 	private boolean evenUp = false;// 가려는 목적지가 짝수 위 버튼
 	private boolean evenDown = false;// 짝수 아래 버튼
