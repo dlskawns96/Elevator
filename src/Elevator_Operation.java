@@ -47,13 +47,8 @@ public class Elevator_Operation {
     	if(current_floor < dest && stopping == false){ // 제일 마지막 목적지에 도달하지 않고 움직이고 있다면...실행됩니다...
     		//모든 사람들은 본인의 목적지를 가지고 올라가기 시작합니다...
     		current_floor = current_floor + 1;
-    		if(stop[current_floor - 1]){ // 멈춰야 하는 층에서는 멈춰야겠지요...
-    			stopping = true; // 앙~멈춤띠
-    			stop[current_floor - 1] = false;
-    		}
     	}
     	else{
-    		//문을 열고 사람들이 나가기 시작합니다...
     		//또한 꼭대기에 올라왔으니....내려가야 겠지요...
     		goingUp = false;
     	}
@@ -63,16 +58,22 @@ public class Elevator_Operation {
     	if(current_floor > dest && stopping == false){// 제일 마지막 목적지에 도달하지 않고 움직이고 있다면...실행됩니다...
     		//모든 사람들이 목적지를 가지고 내려가기 시작합니다.
     		current_floor = current_floor - 1;
-    		if(stop[current_floor - 1]){ // 멈춰야 하는 층에서는 멈춰야겠지요...
-    			stopping = true; // 앙~멈춤띠
-    			stop[current_floor - 1] = false;
-    		}
     	}
     	else{
-    		//문을 열고 사람들이 나가기 시작합니다...
-    		//또한 밑바닥을 찍었으니...올라가야겠지요...
+       		//또한 밑바닥을 찍었으니...올라가야겠지요...
     		goingUp = true;
     	}
+    }
+    
+    public void check_arrive(){
+    	if(stop[current_floor - 1]){
+    		stopping = true;
+    		stop[current_floor - 1] = false;
+    	}
+    }
+    
+    public void departure(){ // isArrive를 완료시켰다면...이것을 이용하여...추울발!
+    	stopping = false;
     }
     
     public boolean boarding(int person_weight, int person_dest){ // 사람들이 탈수있는지 보는 것 입니다.
@@ -92,32 +93,7 @@ public class Elevator_Operation {
     	}
     }
     
-    public void departure(){ // isArrive를 완료시켰다면...이것을 이용하여...추울발!
-    	stopping = false;
-    }
-    
     public void minum_weight(int person_weight){ // 내리는 사람 몸무게를 빼주어...엘리베이터에서 내리게 하는 것입니다...
     	current_weight = current_weight - person_weight;
     }
-    
-   /* public int estimate_time(in request_floor, boolean goUp){
-    	int time = 0;
-    	
-    	if(goUp == true && goingUp == true && current_floor < request_floor){
-    		time = request_floor - current_floor;
-    		for(int i = current_floor; i < request_floor; i++){
-    			if(stop[i - 1] == true)
-    				time++;
-    		}
-    		return time;
-    	}
-    	else if(goUp == true && goingUp == true && current_floor > request_floor){
-    		time = top - current_floor;
-    		for(int i = current_floor; i < top; i++){
-    			if(stop[i-1] == true)
-    				time++;
-    		}
-    		time = time + top - request_floor;
-    	}
-    }*/
 }

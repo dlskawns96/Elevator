@@ -3,9 +3,9 @@ public class Elevator_Controller {
 
 	final static int personNumber =10;
 	static Person[] person;
-	Elevator_Operation odd = new Elevator_Operation();// 홀수층 전용 엘리베이터 
-	Elevator_Operation even = new Elevator_Operation();// 짝수층 전용 엘리베이터
-	Elevator_Operation total = new Elevator_Operation(); // 전체층 엘리베이터
+	static Elevator_Operation odd = new Elevator_Operation();// 홀수층 전용 엘리베이터 
+	static Elevator_Operation even = new Elevator_Operation();// 짝수층 전용 엘리베이터
+	static Elevator_Operation total = new Elevator_Operation(); // 전체층 엘리베이터
 	static Person[] oddArr = new Person[personNumber];
 	static Person[] evenArr = new Person[personNumber];
 	static Person[] totalArr = new Person[personNumber];
@@ -49,7 +49,6 @@ public class Elevator_Controller {
 	}
 	public static void allocateElevator(Person man){// man에게 최적화된 elevator를 할당시켜준다.
 		if(man.getTotal() == true){// 가려는 층과 현재 있는 층이 달라서 total elevator만 이용해야 하는 경우
-			
 		}
 		else if(man.getEvenDown() == true || man.getEvenUp() == true){
 			// 짝수 층
