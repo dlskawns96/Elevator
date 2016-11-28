@@ -9,6 +9,9 @@ public class Elevator_Controller {
 	static Person[] oddArr = new Person[personNumber];
 	static Person[] evenArr = new Person[personNumber];
 	static Person[] totalArr = new Person[personNumber];
+
+	// Boarding이 허락이 나면 Elevator_Opration에 있는 request()를 만들어서 Person객체 넘겨주기
+	// Run() 만들기 - odd, even, total 중 어느 엘리베이터의 run()을 불러올지 결정
 	
 	public static void main(String[] args) {
 		person = new Person[personNumber];
@@ -49,12 +52,6 @@ public class Elevator_Controller {
 	}
 	public static void allocateElevator(Person man){// man에게 최적화된 elevator를 할당시켜준다.
 		if(man.getTotal() == true){// 가려는 층과 현재 있는 층이 달라서 total elevator만 이용해야 하는 경우
-			while(total.getCurrentFloor() != man.getStart()){
-				if(total.getCurrentFloor() < man.getStart())
-					total.up();
-				else
-					total.down();
-			}
 		}
 		else if(man.getEvenDown() == true || man.getEvenUp() == true){
 			// 짝수 층

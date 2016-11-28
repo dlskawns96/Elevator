@@ -1,4 +1,3 @@
-
 public class Elevator_Operation {
 	private static int top = 10;
     private static int bottom = 1;
@@ -9,7 +8,8 @@ public class Elevator_Operation {
     private boolean[] stop = new boolean[10];
     private boolean goingUp;// 전체적인 방향성
     private boolean stopping;// 손님을 내리기 위해서 멈추었는가
-    private boolean isWork;
+    private boolean isWork; // 일하고 있는지 아닌지
+    private Person[] passenger = new Person[20]; // 탑승객 리스트
     
     public Elevator_Operation(){
     	int i;
@@ -23,6 +23,10 @@ public class Elevator_Operation {
     	for(i = 0; i < top; i++)
     		stop[i] = false;
     }
+    
+    // request(Person next_person) 만들기 - 탑승이 허락된 승객의 정보를 업데이트 하여 dest와 stop[]을 업데이트 해주어 어디서 정지해야할지 결정
+    // Run()만들기 - 엘리베이터가 다음 턴에 수행할 작업을 처리해주는 메소드
+    // Person의 isArrive와 isBoarding을 처리해 줄 방법 만들기
 
 	public int getDest() {
 		return dest;
