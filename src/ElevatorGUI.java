@@ -12,23 +12,26 @@ import javax.swing.border.LineBorder;
 
 public class ElevatorGUI extends JFrame {
 
-	private JPanel contentPane;
-	JLabel firstElevator[] = new JLabel[10];
-	JLabel secondElevator[] = new JLabel[10];
-	JLabel thirdElevator[] = new JLabel[10];
+	private JPanel contentPane = new JPanel();
+	private JLabel firstElevator[] = new JLabel[10];
+	private JLabel secondElevator[] = new JLabel[10];
+	private JLabel thirdElevator[] = new JLabel[10];
 	
 	private ImageIcon elevatorIcon = new ImageIcon("elevator.png");
 	
-	private int curFloor[] = new int[3];
+	private static int curFloor[] = new int[3];
 	
 	/**
 	 * Launch the application.
 	 */	
 
-	public void run() {
+	public static void run() {
+		
+		curFloor[0] = 0;
+		curFloor[1] = 0;
+		curFloor[2] = 0;
 		try {
-			ElevatorGUI frame = new ElevatorGUI();
-			
+			ElevatorGUI frame = new ElevatorGUI();			
 			frame.setVisible(true);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -42,7 +45,7 @@ public class ElevatorGUI extends JFrame {
 	public ElevatorGUI() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 225, 845);
-		contentPane = new JPanel();
+		
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		
 		setContentPane(contentPane);
@@ -72,28 +75,33 @@ public class ElevatorGUI extends JFrame {
 		firstElevator[0].setIcon(elevatorIcon);
 		secondElevator[0].setIcon(elevatorIcon);
 		thirdElevator[0].setIcon(elevatorIcon);		
-		
-		curFloor[0] = 0;
-		curFloor[1] = 0;;
-		curFloor[2] = 0;
+	
 	}
 	
 	public void setElevator(int n, int k)
 	{
 		if(n == 1)
 		{
+			
 			firstElevator[curFloor[0]].setIcon(null);
 			firstElevator[k - 1].setIcon(elevatorIcon);
+			curFloor[0] = k -1;
 		}
 		else if(n == 2)
 		{
 			secondElevator[curFloor[1]].setIcon(null);
 			secondElevator[k-1].setIcon(elevatorIcon);
+			curFloor[1] = k -1;
 		}
 		else
 		{
 			thirdElevator[curFloor[2]].setIcon(null);
 			thirdElevator[k-1].setIcon(elevatorIcon);
+			curFloor[2] = k -1;
 		}
+		
+		setVisible(false);
+		setVisible(true);
+		
 	}
 }
