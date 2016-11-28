@@ -7,7 +7,7 @@ public class Elevator_Operation {
     private int max_weight;
     private int dest;
     private boolean[] stop = new boolean[10];
-    private boolean goingUp;
+    private boolean goingUp;// 전체적인 방향성
     private boolean stopping;
     
     
@@ -83,7 +83,7 @@ public class Elevator_Operation {
     			dest = person_dest;
     		}
     		else if(goingUp == false && person_dest < dest){ // 위와 같이 이건 목적지가 제일 낮으면 업데이트 하는 것.
-    			dest = person_dest;
+    			dest = person_dest;  
     		}
     		return true; // 탔음을 알립니다.
     	}

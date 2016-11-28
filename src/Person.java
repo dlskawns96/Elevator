@@ -29,7 +29,7 @@ public class Person {
 				break;
 			
 		}
-	
+		
 		weight = makeWeight();
 		
 		isArrival = false;
