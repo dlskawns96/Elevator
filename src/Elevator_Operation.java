@@ -94,4 +94,8 @@ public class Elevator_Operation {
     public void departure(){ // isArrive를 완료시켰다면...이것을 이용하여...추울발!
     	stopping = false;
     }
+    
+    public void minum_weight(int person_weight){ // 내리는 사람 몸무게를 빼주어...엘리베이터에서 내리게 하는 것입니다...
+    	current_weight = current_weight - person_weight;
+    }
 }
