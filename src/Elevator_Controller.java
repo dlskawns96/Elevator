@@ -18,6 +18,7 @@ public class Elevator_Controller {
 			person[i] = new Person();// »ç¶÷µé 10¸í ¸ÕÀú »ý¼º
 			oddArr[i] = null;
 			evenArr[i] = null;
+			totalArr[i] = null;
 			System.out.println(person[i].getWeight());
 		}
 		while(true){
@@ -51,17 +52,22 @@ public class Elevator_Controller {
 			
 		}
 		else if(man.getEvenDown() == true || man.getEvenUp() == true){
-			// È¦¼ö Ãþ
+			// Â¦¼ö Ãþ
 			if(man.getEvenDown() == true){
-				// È¦¼ö ¾Æ·¡·Î
+				// Â¦¼ö ¾Æ·¡·Î
 			}
 			else{
-				
+				// Â¦¼ö À§·Î
 			}
 		}
 		else if(man.getOddDown() == true || man.getOddUp() == true){
 			// Â¦¼öÃþ
-			
+			if(man.getOddDown() == true){
+				// È¦¼ö ¾Æ·¡·Î
+			}
+			else{
+				//È¦¼ö À§·Î
+			}
 		}
 		
 	}
